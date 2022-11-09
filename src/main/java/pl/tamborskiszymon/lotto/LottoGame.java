@@ -10,24 +10,24 @@ import java.util.Set;
 public class LottoGame implements LotteryGame {
 
     private final Scanner scanner;
-    private final LottoMessageProvider lottoMessageProvider;
     private final LottoInputReceiver lottoInputReceiver;
 
-    public LottoGame(Scanner scanner, LottoMessageProvider lottoMessageProvider, LottoInputReceiver lottoInputReceiver) {
+    public LottoGame(Scanner scanner, LottoInputReceiver lottoInputReceiver) {
         this.scanner = scanner;
-        this.lottoMessageProvider = lottoMessageProvider;
         this.lottoInputReceiver = lottoInputReceiver;
     }
 
     @Override
     public String startGame() {
-        final Set<Integer> inputNumbers = lottoInputReceiver.getSixNumbers();
-        String result = new String(Arrays.toString(inputNumbers.toArray()));
-        return "gamestarted: " + result;
+        System.out.println(String.format(LottoMessageProvider.GAME_STARTED));
+        final String gameResultInfo = checkNumbersConvergence();
+        return "gamestarted: " + gameResultInfo;
     }
 
     @Override
     public String checkNumbersConvergence() {
+        final Set<Integer> inputNumbers = lottoInputReceiver.getSixNumbers();
+        System.out.println(Arrays.asList(inputNumbers));
         return "we are checking numbers from user in convergence with random ones";
     }
 
