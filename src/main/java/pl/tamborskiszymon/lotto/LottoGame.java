@@ -19,20 +19,18 @@ public class LottoGame implements LotteryGame {
 
     @Override
     public String startGame() {
-        System.out.println(String.format(LottoMessageProvider.GAME_STARTED));
+        System.out.println(String.format(LottoMessageProvider.GAME_X_STARTED, LottoMessageProvider.GAME_NAME));
         final String gameResultInfo = checkNumbersConvergence();
         return "gamestarted: " + gameResultInfo;
     }
 
-    @Override
-    public String checkNumbersConvergence() {
+    private String checkNumbersConvergence() {
         final Set<Integer> inputNumbers = lottoInputReceiver.getSixNumbers();
         System.out.println(Arrays.asList(inputNumbers));
         return "we are checking numbers from user in convergence with random ones";
     }
 
-    @Override
-    public String getGameResult() {
+    private String getGameResult() {
         return "game result";
     }
 }

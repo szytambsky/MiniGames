@@ -15,11 +15,11 @@ public class LottoInputReceiver {
     private Set<Integer> getNumbersFromUserInput() {
         final Set<Integer> givenNumbers = new HashSet<>();
         Scanner scanner = new Scanner(System.in);
-        System.out.println(String.format(LottoMessageProvider.PLEASE_GIVE_NUMBER, LottoMessageProvider.HOW_MANY_NUMBERS));
+        System.out.println(String.format(LottoMessageProvider.PLEASE_GIVE_NUMBERS, LottoConfiguration.HOW_MANY_NUMBERS_FROM_USER));
         while (areLessThanNeededNumers(givenNumbers)) {
-            System.out.println(String.format(LottoMessageProvider.NOT_ENOUGH_NUMBER));
+            System.out.println(String.format(LottoMessageProvider.GIVE_NUMBER));
             while (!scanner.hasNextInt()) {
-                System.out.println(String.format(LottoMessageProvider.NUMBER_NOT_IN_RANGE));
+                System.out.println(String.format(LottoMessageProvider.NUMBER_NOT_IN_RANGE, LottoConfiguration.LOWER_RANGE, LottoConfiguration.HIGHER_RANGE));
                 while (!scanner.hasNext()) {
                     return Collections.emptySet();
                 }
@@ -35,21 +35,18 @@ public class LottoInputReceiver {
     }
 
     private boolean areLessThanNeededNumers(Set<Integer> givenNumbers) {
-        int howManyNumbers = LottoMessageProvider.HOW_MANY_NUMBERS;
-        if (givenNumbers.size() < howManyNumbers) {
-            return true;
-        }
-        return false;
+        return givenNumbers.size() < LottoConfiguration.HOW_MANY_NUMBERS_FROM_USER;
     }
 
     private void validateNumber(Set<Integer> givenNumbers, int userInput) {
-        int howManyNumbers = LottoMessageProvider.HOW_MANY_NUMBERS;
-        if (givenNumbers.size() < howManyNumbers) {
-            if (LottoConfiguration.LOWER_RANGE <= userInput && userInput <= LottoConfiguration.HIGHER_RANGE) {
-                givenNumbers.add(Integer.valueOf(userInput));
-            } else {
-                System.out.println(String.format(LottoMessageProvider.NUMBER_NOT_IN_RANGE));
-            }
+        if (isNumberInRange(userInput)) {
+            givenNumbers.add(Integer.valueOf(userInput));
+        } else {
+            System.out.println(String.format(LottoMessageProvider.NUMBER_NOT_IN_RANGE, LottoConfiguration.LOWER_RANGE, LottoConfiguration.HIGHER_RANGE));
         }
+    }
+
+    private boolean isNumberInRange(int userInput) {
+        return LottoConfiguration.LOWER_RANGE <= userInput && userInput <= LottoConfiguration.HIGHER_RANGE;
     }
 }
