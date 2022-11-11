@@ -7,14 +7,13 @@ import java.util.*;
 
 public class LottoInputReceiver {
 
-    public Set<Integer> getSixNumbers() {
-        Set<Integer> givenNumbersFromUser = getNumbersFromUserInput();
+    public Set<Integer> getSixNumbers(Scanner scanner) {
+        Set<Integer> givenNumbersFromUser = getNumbersFromUserInput(scanner);
         return givenNumbersFromUser;
     }
 
-    private Set<Integer> getNumbersFromUserInput() {
+    private Set<Integer> getNumbersFromUserInput(Scanner scanner) {
         final Set<Integer> givenNumbers = new HashSet<>();
-        Scanner scanner = new Scanner(System.in);
         System.out.println(String.format(LottoMessageProvider.PLEASE_GIVE_NUMBERS, LottoConfiguration.HOW_MANY_NUMBERS_FROM_USER));
         while (areLessThanNeededNumers(givenNumbers)) {
             System.out.println(String.format(LottoMessageProvider.GIVE_NUMBER));

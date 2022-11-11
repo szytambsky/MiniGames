@@ -35,7 +35,7 @@ public class LottoGame implements LotteryGame {
     }
 
     private GameResultInfo checkNumbersAccuracy() {
-        final Set<Integer> userInputNumbers = lottoInputReceiver.getSixNumbers();
+        final Set<Integer> userInputNumbers = lottoInputReceiver.getSixNumbers(scanner);
         final Set<Integer> generatedNumbers = lottoNumberGenerator.generateWinningNumbers();
         return lottoAccuracyCalculator.getAccuracyNumbers(generatedNumbers, userInputNumbers);
     }
