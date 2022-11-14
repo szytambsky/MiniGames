@@ -48,4 +48,8 @@ public class LottoInputReceiver {
     private boolean isNumberInRange(int userInput) {
         return LottoConfiguration.LOWER_RANGE <= userInput && userInput <= LottoConfiguration.HIGHER_RANGE;
     }
+
+    public int multiply(int first, int second) {
+        return first * second;
+    }
 }
